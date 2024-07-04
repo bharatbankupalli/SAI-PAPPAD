@@ -1,0 +1,13 @@
+your-repository-name/
+├── src
+│   └── main
+│       └── java
+│           └── com
+│               └── example
+│                   └── yourapp
+│                       └── App.java
+├── .gitignore
+├── README.md
+├── pom.xml (if using Maven)
+└── build.gradle (if using Gradle)
+[A[A[C[C[C[C[C[C[C[C[C[C[A[A[A[A[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[B[B[C[C[Sai pappadweb[B[B[B[B[B[B[C
