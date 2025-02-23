@@ -1,20 +1,38 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: my-java-app
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: my-java-app
-  template:
-    metadata:
-      labels:
-        app: my-java-app
-    spec:
-      containers:
-      - name: my-java-app
-        image: my-java-app:latest
-        ports:
-        - containerPort: 8080
+# GitHub Actions workflow to deploy Sai Papad Website to GitHub Pages
+name: Deploy Sai Papad Website to Pages
 
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Site Files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' # Change if your files are inside 'dist' or 'docs'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
